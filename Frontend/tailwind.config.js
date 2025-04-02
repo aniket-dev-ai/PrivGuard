@@ -14,7 +14,7 @@ export default {
         darkText: "#FFFFFF",
         darkSubText: "#B3B3B3",
 
-        lightBg: "#F5F5F5",
+        lightBg: "#EEEEEE",
         lightCard: "#FFFFFF",
         lightPrimary: "#27548A",
         lightSecondary: "#E63946",
@@ -31,3 +31,5 @@ export default {
   },
   plugins: [],
 };
+
+        // lightBg: "#F5F5F5",

@@ -5,6 +5,7 @@ import ThemeToggle from "../Theme/THemeToggle";
 
 const Navbar = () => {
   const theme = useSelector((state) => state.theme.theme);
+  const user = useSelector((state)=> state.auth.user);
   const dispatch = useDispatch();
 
   return (
@@ -35,7 +36,7 @@ const Navbar = () => {
 
         {/* User Profile */}
         <button className="p-2 rounded-full hover:bg-darkCard hover:text-lightBg">
-          <FiUser size={20} />
+          {user ? <FiUser size={20} /> : "Login"}
         </button>
       </div>
     </nav>

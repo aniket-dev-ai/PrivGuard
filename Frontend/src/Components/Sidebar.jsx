@@ -10,15 +10,16 @@ const Sidebar = () => {
   const bgColor = theme === "dark" ? "bg-darkBg" : "bg-lightBg";
   const textColor = theme === "dark" ? "text-darkText" : "text-lightText";
   const hoverBg = theme === "dark" ? "hover:bg-darkCard" : "hover:bg-lightCard";
-  const borderColor = theme === "dark" ? "border-darkSubText" : "border-lightSubText";
+  const borderColor =
+    theme === "dark" ? "border-darkSubText" : "border-lightSubText";
 
   return (
     <>
       {/* Menu Button (Fixed) */}
       <button
-        className={`fixed top-4 left-4 z-50 bg-transparent ${
+        className={`fixed top-4 left-4 z-40 bg-transparent ${
           theme === "dark" ? "text-darkText" : "text-lightText"
-        } p-3 rounded-md shadow-inner transition-all duration-300`}
+        } p-3 rounded-md shadow-inner z-50 transition-all duration-300`}
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -32,6 +33,7 @@ const Sidebar = () => {
       >
         {/* Sidebar Header */}
         <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+          {/* <FiX size={24} onClick={() => setIsOpen(!isOpen)} /> */}
           🚀 PrivGuard
         </h2>
 

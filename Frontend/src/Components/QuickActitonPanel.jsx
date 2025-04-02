@@ -4,7 +4,7 @@ const QuickActions = () => {
   const theme = useSelector((state) => state.theme.theme);
 
   // Theme colors
-  const bgColor = theme === "dark" ? "bg-darkCard " : "bg-lightCard";
+  const bgColor = theme === "dark" ? "bg-darkCard  " : "bg-lightCard";
   const textColor = theme === "dark" ? "text-darkText" : "text-lightText";
   const borderColor =
     theme === "dark" ? "border-darkSubText" : "border-lightSubText";

@@ -8,6 +8,7 @@ import Signup from "./Pages/SignUp";
 import OtpVerification from "./Pages/OtpVerification";
 import ResetPassword from "./Pages/ResetPassword";
 import ChangePassword from "./Pages/CHangePassword";
+import FakeDataGenerator from "./Pages/FakeDataGenerator";
 
 function App() {
   // Redux store to get the theme
@@ -19,7 +20,7 @@ function App() {
       <OtpVerification/>
       <ResetPassword/>
       <ChangePassword/> */}
-      <div className={`flex min-h-screen bg-${
+      <div className={`flex font-robotoMono min-h-screen bg-${
         theme === "dark" ? "darkBg" : "lightBg"
         }`}>
         <Sidebar />
@@ -28,9 +29,9 @@ function App() {
           <div className="p-5 mt-16"> {/* Adjust for Navbar height */}
             <Routes>
               <Route path="/" element={<Dashboard/>} />
-              <Route path="/login" element={<Login/>} />
-              <Route path="/fake-data" element={<h1 className="text-2xl font-bold">🕵️ Fake Data</h1>} />
-              <Route path="/breach-check" element={<h1 className="text-2xl font-bold">🔍 Breach Check</h1>} />
+              <Route path="/login" element={<Signup/>} />
+              <Route path="/fake-data" element={<Login/>} />
+              <Route path="/breach-check" element={<FakeDataGenerator/>} />
               <Route path="/settings" element={<h1 className="text-2xl font-bold">⚙️ Settings</h1>} />
             </Routes>
           </div>

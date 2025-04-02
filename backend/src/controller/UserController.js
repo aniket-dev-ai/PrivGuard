@@ -22,6 +22,7 @@ export const createUser = async (req, res) => {
 export const loginuser = async (req, res) => {
   try {
     const { Email, PassHashed } = req.body;
+    console.log(Email, PassHashed);
     if (!Email || !PassHashed) {
       return res.status(400).json({ message: "Please fill all fields" });
     }
@@ -39,6 +40,8 @@ export const loginuser = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
+    console.log(token);
+    console.log(user);
     res.status(200).json({ token, user });
   } catch (error) {
     res.status(500).json({ message: error.message });
