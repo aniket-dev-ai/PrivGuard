@@ -14,7 +14,7 @@ export default {
         darkText: "#FFFFFF",
         darkSubText: "#B3B3B3",
 
-        lightBg: "#EEEEEE",
+        lightBg: "#F5F5F5 ",
         lightCard: "#FFFFFF",
         lightPrimary: "#27548A",
         lightSecondary: "#E63946",

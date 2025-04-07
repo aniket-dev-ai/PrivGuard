@@ -2,32 +2,38 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { loginUser, signupUser } from "../api/authApi";
 
 // Login Thunk
-export const login = createAsyncThunk("auth/login", async (userData, thunkAPI) => {
-  try {
-    const data = await loginUser(userData);
-    localStorage.setItem("token", data.token);  
-    console.log(data);
-    return data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error);
+export const login = createAsyncThunk(
+  "auth/login",
+  async (userData, thunkAPI) => {
+    try {
+      const data = await loginUser(userData);
+      localStorage.setItem("token", data.token);
+      console.log(data);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
-});
+);
 
 // Signup Thunk
-export const signup = createAsyncThunk("auth/signup", async (userData, thunkAPI) => {
-  try {
-    const data = await signupUser(userData);
-    return data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error);
+export const signup = createAsyncThunk(
+  "auth/signup",
+  async (userData, thunkAPI) => {
+    try {
+      const data = await signupUser(userData);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
-});
+);
 
 // Auth Slice
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: null,
+    user: JSON.parse(localStorage.getItem("user")),
     token: localStorage.getItem("token") || null,
     loading: false,
     error: null,
@@ -51,6 +57,9 @@ const authSlice = createSlice({
         console.log(action);
         state.user = action.payload.user;
         state.token = action.payload.token;
+        localStorage.setItem("user", JSON.stringify(state.user));
+        console.log("Local");
+        console.log(state.user);
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
@@ -63,7 +72,7 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(signup.fulfilled, (state, action) => {
-    console.log(action);
+        console.log(action);
         state.loading = false;
       })
       .addCase(signup.rejected, (state, action) => {

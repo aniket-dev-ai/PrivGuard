@@ -1,13 +1,18 @@
 import mongoose, { Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import generateProfilePic from '../Utils/generateProfilePic.js';
 
 const userSchema = Schema({
     Email:{
         type:String,
         required:true
     },
-    Name:{
+    FirstName:{
+        type:String,
+        required:true
+    },
+    LastName:{
         type:String,
         required:true
     },
@@ -15,6 +20,14 @@ const userSchema = Schema({
         type:String,
         required:true
     },
+    profilePic:{
+        type:String, 
+        default: function () {
+            return generateProfilePic(this.FirstName, this.LastName); // ✅ Auto-generate profile pic
+        }
+    },
+
+
     // sharedData:[
     //     {
     //         type:Schema.Types.ObjectId,

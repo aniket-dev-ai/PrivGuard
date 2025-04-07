@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const QuickActions = () => {
   const theme = useSelector((state) => state.theme.theme);
@@ -13,20 +14,20 @@ const QuickActions = () => {
 
   const actions = [
     {
-      label: "⚡ Fake Data Generator",
-      action: () => alert("Fake Data Created!"),
+      label: "⚡ Fake Data Generator", 
+      to:"fake-data"
     },
     {
-      label: "🔍 Breach Check",
-      action: () => alert("Checking for Breaches..."),
+      label: "🔍 Breach Check", 
+      to:"breach-check"
     },
     {
-      label: "🗑️ Clear Tracking Data",
-      action: () => alert("Tracking Data Cleared!"),
+      label: "🗑️ Clear Tracking Data", 
+      to:"clear-tracking"
     },
     {
-      label: "🔑 Password Strength Test",
-      action: () => alert("Password Strength Checked!"),
+      label: "🔑 Password Strength Test", 
+      to:"password-strength"
     },
   ];
 
@@ -38,13 +39,13 @@ const QuickActions = () => {
 
       <div className="grid grid-cols-2 gap-4">
         {actions.map((action, index) => (
-          <button
-            key={index}
-            onClick={action.action}
+          <Link 
+          key={index}
+            to={action.to} 
             className={`p-4 rounded-lg shadow-inner border ${borderColor} ${bgColor} shadow-md flex flex-col items-center justify-center text-center gap-2 ${textColor} transition-all duration-300 transform hover:scale-105 ${hoverColor}`}
           >
             {action.label}
-          </button>
+          </Link>
         ))}
       </div>
     </div>

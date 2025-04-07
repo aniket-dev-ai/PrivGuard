@@ -51,7 +51,7 @@ const Sidebar = () => {
             className={`block p-3 rounded-md transition-all ${hoverBg} flex items-center gap-2`}
             onClick={() => setIsOpen(false)}
           >
-            🔗 Shared Data
+            🔗 Login
           </Link>
           <Link
             to="/fake-data"
@@ -61,11 +61,11 @@ const Sidebar = () => {
             🕵️ Fake Data
           </Link>
           <Link
-            to="/breach-check"
+            to="/Signup"
             className={`block p-3 rounded-md transition-all ${hoverBg} flex items-center gap-2`}
             onClick={() => setIsOpen(false)}
           >
-            🔍 Breach Check
+            🔍 Sign-in
           </Link>
           <Link
             to="/settings"

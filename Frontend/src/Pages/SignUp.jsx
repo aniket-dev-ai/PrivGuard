@@ -10,25 +10,30 @@ const Signup = () => {
   const { loading, error } = useSelector((state) => state.auth);
 
   const [userData, setUserData] = useState({
-    Name: "",
+    FirstName: "",
+    LastName: "",
     Email: "",
     PassHashed: "",
   });
- 
+
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!userData.Name || !userData.Email || !userData.PassHashed) {
+    if (!userData.FirstName || !userData.Email || !userData.PassHashed) {
       alert("Please fill all fields");
       return;
     }
 
-    const res = await dispatch(signup(userData));
-    if (res.payload?.user) {
-      navigate("/");  
+    try {
+      const res = await dispatch(signup(userData)).unwrap(); // unwrap() to handle payload properly
+      if (res?.user) {
+        navigate("/");
+      }
+    } catch (err) {
+      console.error("Signup error:", err);
     }
   };
 
@@ -46,9 +51,21 @@ const Signup = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
-            name="Name"  // ✅ Fixed name prop
-            placeholder="Enter your Name"
-            value={userData.Name}
+            name="FirstName"
+            placeholder="Enter your First Name"
+            value={userData.FirstName}
+            onChange={handleChange}
+            className={`w-full p-3 rounded-md border focus:outline-none focus:ring-2 ${
+              theme === "dark"
+                ? "bg-darkBg border-darkSubText text-darkText focus:ring-darkPrimary"
+                : "bg-lightBg border-lightSubText text-lightText focus:ring-lightPrimary"
+            }`}
+          />
+          <input
+            type="text"
+            name="LastName"
+            placeholder="Enter your Last Name"
+            value={userData.LastName}
             onChange={handleChange}
             className={`w-full p-3 rounded-md border focus:outline-none focus:ring-2 ${
               theme === "dark"
@@ -59,7 +76,7 @@ const Signup = () => {
 
           <input
             type="email"
-            name="Email"  // ✅ Fixed name prop
+            name="Email"
             placeholder="Enter your Email"
             value={userData.Email}
             onChange={handleChange}
@@ -71,8 +88,8 @@ const Signup = () => {
           />
 
           <input
-            type="password"  // ✅ Fixed type from "PassHashed" to "password"
-            name="PassHashed"  // ✅ Fixed name prop
+            type="password"
+            name="PassHashed"
             placeholder="Create a Password"
             value={userData.PassHashed}
             onChange={handleChange}
@@ -96,7 +113,7 @@ const Signup = () => {
           </button>
         </form>
 
-        <p className="text-center mt-4">
+        <p className="text-center  mt-4">
           Already have an account?{" "}
           <a href="/login" className={`font-bold ${theme === "dark" ? "text-darkPrimary" : "text-lightPrimary"}`}>
             Login

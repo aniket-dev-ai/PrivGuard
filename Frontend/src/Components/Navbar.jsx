@@ -20,7 +20,7 @@ const Navbar = () => {
       <h1 className="text-xl font-bold ml-12"> PrivGuard</h1>
 
       {/* Right Side - Icons */}
-      <div className="flex items-center space-x-6">
+      <div className="flex items-center md:space-x-6">
         {/* Notification Icon */}
         <button className="relative p-2 rounded-full hover:bg-darkCard hover:text-lightBg">
           <FiBell size={20} />
@@ -35,8 +35,8 @@ const Navbar = () => {
         </button>
 
         {/* User Profile */}
-        <button className="p-2 rounded-full hover:bg-darkCard hover:text-lightBg">
-          {user ? <FiUser size={20} /> : "Login"}
+        <button className="p-1 rounded-full hover:bg-darkCard hover:text-lightBg">
+          {user ?  <img className="h-8 w-8 md:h-10 md:w-10 rounded-full " src={user?.profilePic}></img> : <FiUser size={20} />}
         </button>
       </div>
     </nav>

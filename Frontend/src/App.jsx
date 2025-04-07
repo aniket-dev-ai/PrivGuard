@@ -29,9 +29,9 @@ function App() {
           <div className="p-5 mt-16"> {/* Adjust for Navbar height */}
             <Routes>
               <Route path="/" element={<Dashboard/>} />
-              <Route path="/login" element={<Signup/>} />
-              <Route path="/fake-data" element={<Login/>} />
-              <Route path="/breach-check" element={<FakeDataGenerator/>} />
+              <Route path="/Signup" element={<Signup/>} />
+              <Route path="/Login" element={<Login/>} />
+              <Route path="/fake-data" element={<FakeDataGenerator/>} />
               <Route path="/settings" element={<h1 className="text-2xl font-bold">⚙️ Settings</h1>} />
             </Routes>
           </div>
