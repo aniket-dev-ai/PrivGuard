@@ -3,13 +3,10 @@ import Sidebar from "./Components/Sidebar";
 import Navbar from "./Components/Navbar";
 import Dashboard from "./Pages/Dashboards";
 import { useSelector } from "react-redux";
-import Login from "./Pages/Login";
-import Signup from "./Pages/SignUp";
-import OtpVerification from "./Pages/OtpVerification";
-import ResetPassword from "./Pages/ResetPassword";
-import ChangePassword from "./Pages/CHangePassword";
+import Login from "./Pages/Auth/Login";
+import Signup from "./Pages/Auth/SignUp"; 
 import FakeDataGenerator from "./Pages/FakeDataGenerator";
-
+import VaultPage from "./Pages/Vault/Vault";
 function App() {
   // Redux store to get the theme
   const theme = useSelector((state) => state.theme.theme); // FIX: Access `theme` property
@@ -31,7 +28,7 @@ function App() {
               <Route path="/" element={<Dashboard/>} />
               <Route path="/Signup" element={<Signup/>} />
               <Route path="/Login" element={<Login/>} />
-              <Route path="/fake-data" element={<FakeDataGenerator/>} />
+              <Route path="/vault" element={<VaultPage/>} />
               <Route path="/settings" element={<h1 className="text-2xl font-bold">⚙️ Settings</h1>} />
             </Routes>
           </div>

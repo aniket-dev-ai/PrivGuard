@@ -1,35 +1,39 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../Redux/Slice/AuthSlice";
+import { signup } from "../../Redux/Slice/AuthSlice";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.theme);
   const { loading, error } = useSelector((state) => state.auth);
 
-  const [credentials, setCredentials] = useState({
+  const [userData, setUserData] = useState({
+    FirstName: "",
+    LastName: "",
     Email: "",
     PassHashed: "",
   });
 
-  // ✅ Efficient state update
   const handleChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+    setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
-  // ✅ Handle Login Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!credentials.Email || !credentials.PassHashed) {
+    if (!userData.FirstName || !userData.Email || !userData.PassHashed) {
       alert("Please fill all fields");
       return;
     }
 
-    const res = await dispatch(login(credentials));
-    if (res.payload?.user) {
-      navigate("/"); // ✅ Redirect after login success
+    try {
+      const res = await dispatch(signup(userData)).unwrap(); // unwrap() to handle payload properly
+      if (res?.user) {
+        navigate("/");
+      }
+    } catch (err) {
+      console.error("Signup error:", err);
     }
   };
 
@@ -40,17 +44,41 @@ const Login = () => {
       }`}
     >
       <div className={`p-8 rounded-lg shadow-lg w-96 ${theme === "dark" ? "bg-darkCard" : "bg-lightCard"}`}>
-        <h2 className="text-2xl font-bold text-center mb-4">🔐 Login</h2>
+        <h2 className="text-2xl font-bold text-center mb-4">🚀 Sign Up</h2>
 
         {error && <p className="text-red-500 text-center">{error}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Email */}
+          <input
+            type="text"
+            name="FirstName"
+            placeholder="Enter your First Name"
+            value={userData.FirstName}
+            onChange={handleChange}
+            className={`w-full p-3 rounded-md border focus:outline-none focus:ring-2 ${
+              theme === "dark"
+                ? "bg-darkBg border-darkSubText text-darkText focus:ring-darkPrimary"
+                : "bg-lightBg border-lightSubText text-lightText focus:ring-lightPrimary"
+            }`}
+          />
+          <input
+            type="text"
+            name="LastName"
+            placeholder="Enter your Last Name"
+            value={userData.LastName}
+            onChange={handleChange}
+            className={`w-full p-3 rounded-md border focus:outline-none focus:ring-2 ${
+              theme === "dark"
+                ? "bg-darkBg border-darkSubText text-darkText focus:ring-darkPrimary"
+                : "bg-lightBg border-lightSubText text-lightText focus:ring-lightPrimary"
+            }`}
+          />
+
           <input
             type="email"
-            name="Email" // ✅ Fixed name prop
+            name="Email"
             placeholder="Enter your Email"
-            value={credentials.Email}
+            value={userData.Email}
             onChange={handleChange}
             className={`w-full p-3 rounded-md border focus:outline-none focus:ring-2 ${
               theme === "dark"
@@ -59,12 +87,11 @@ const Login = () => {
             }`}
           />
 
-          {/* Password */}
           <input
             type="password"
-            name="PassHashed" // ✅ Fixed name prop
-            placeholder="Enter your Password"
-            value={credentials.PassHashed}
+            name="PassHashed"
+            placeholder="Create a Password"
+            value={userData.PassHashed}
             onChange={handleChange}
             className={`w-full p-3 rounded-md border focus:outline-none focus:ring-2 ${
               theme === "dark"
@@ -73,7 +100,6 @@ const Login = () => {
             }`}
           />
 
-          {/* Login Button */}
           <button
             type="submit"
             className={`w-full py-3 rounded-md font-bold transition-all ${
@@ -83,15 +109,14 @@ const Login = () => {
             }`}
             disabled={loading}
           >
-            {loading ? "Logging in..." : "Login"}
+            {loading ? "Signing Up..." : "Sign Up"}
           </button>
         </form>
 
-        {/* Signup Link */}
-        <p className="text-center mt-4">
-          Don't have an account?{" "}
-          <a href="/signup" className={`font-bold ${theme === "dark" ? "text-darkPrimary" : "text-lightPrimary"}`}>
-            Sign up
+        <p className="text-center  mt-4">
+          Already have an account?{" "}
+          <a href="/login" className={`font-bold ${theme === "dark" ? "text-darkPrimary" : "text-lightPrimary"}`}>
+            Login
           </a>
         </p>
       </div>
@@ -99,4 +124,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

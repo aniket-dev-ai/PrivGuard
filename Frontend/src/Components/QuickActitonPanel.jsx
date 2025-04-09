@@ -26,8 +26,8 @@ const QuickActions = () => {
       to:"clear-tracking"
     },
     {
-      label: "🔑 Password Strength Test", 
-      to:"password-strength"
+      label: "🔑 Password MAnager", 
+      to:"vault"
     },
   ];
 
